@@ -231,34 +231,47 @@
         <p>Contact Us: <a href="mailto:support@webfishing.info">support@webfishing.info</a> | Twitter: <a href="https://twitter.com/bug_fishing" target="_blank">@bug_fishing</a></p>
     </footer>
 
-    <script>
+<script>
         function fetchSteamNews() {
-            const proxyUrl = 'https://api.allorigins.win/raw?url=';
+            const proxyUrl = 'https://corsproxy.io/?';
             const steamRssUrl = 'https://store.steampowered.com/feeds/news/app/3146520/';
             
             fetch(proxyUrl + encodeURIComponent(steamRssUrl))
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
                 .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
                 .then(data => {
                     const items = data.querySelectorAll("item");
+                    if (items.length === 0) {
+                        throw new Error("No news items found");
+                    }
                     let html = '';
-                    items.forEach(el => {
-                        html += `
-                            <h3>${el.querySelector("title").textContent}</h3>
-                            <p>${el.querySelector("description").textContent}</p>
-                            <a href="${el.querySelector("link").textContent}" target="_blank">Read more</a>
-                        `;
+                    items.forEach((el, index) => {
+                        if (index < 5) {  // Limit to 5 news items
+                            html += `
+                                <h3>${el.querySelector("title").textContent}</h3>
+                                <p>${el.querySelector("description").textContent.slice(0, 100)}...</p>
+                                <a href="${el.querySelector("link").textContent}" target="_blank">Read more</a>
+                            `;
+                        }
                     });
                     document.getElementById("steam-news").innerHTML = html;
                 })
                 .catch(err => {
                     console.log('Failed to fetch Steam news: ', err);
-                    document.getElementById("steam-news").innerHTML = "Failed to load updates. Please try again later.";
+                    document.getElementById("steam-news").innerHTML = "Failed to load updates. Please try again later. Error: " + err.message;
                 });
         }
 
         // Call the function when the page loads
         fetchSteamNews();
+
+        // Retry every 5 minutes if it fails
+        setInterval(fetchSteamNews, 300000);
     </script>
 </body>
 </html>
