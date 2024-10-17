@@ -168,6 +168,17 @@
         footer a:hover {
             text-decoration: underline;
         }
+        #steam-news {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        #steam-news h3 {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        #steam-news p {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -190,8 +201,8 @@
                     </div>
                 </div>
                 <div class="notice">
-                    <h2>Latest Update</h2>
-                    <p>New quest available in the freeaaaaky forest!</p>
+                    <h2>Latest Updates</h2>
+                    <div id="steam-news">Loading latest updates...</div>
                 </div>
                 <div class="notice">
                     <h2>Upcoming Event</h2>
@@ -219,5 +230,35 @@
     <footer>
         <p>Contact Us: <a href="mailto:support@webfishing.info">support@webfishing.info</a> | Twitter: <a href="https://twitter.com/bug_fishing" target="_blank">@bug_fishing</a></p>
     </footer>
+
+    <script>
+        function fetchSteamNews() {
+            const proxyUrl = 'https://api.allorigins.win/raw?url=';
+            const steamRssUrl = 'https://store.steampowered.com/feeds/news/app/3146520/';
+            
+            fetch(proxyUrl + encodeURIComponent(steamRssUrl))
+                .then(response => response.text())
+                .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+                .then(data => {
+                    const items = data.querySelectorAll("item");
+                    let html = '';
+                    items.forEach(el => {
+                        html += `
+                            <h3>${el.querySelector("title").textContent}</h3>
+                            <p>${el.querySelector("description").textContent}</p>
+                            <a href="${el.querySelector("link").textContent}" target="_blank">Read more</a>
+                        `;
+                    });
+                    document.getElementById("steam-news").innerHTML = html;
+                })
+                .catch(err => {
+                    console.log('Failed to fetch Steam news: ', err);
+                    document.getElementById("steam-news").innerHTML = "Failed to load updates. Please try again later.";
+                });
+        }
+
+        // Call the function when the page loads
+        fetchSteamNews();
+    </script>
 </body>
 </html>
