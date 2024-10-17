@@ -97,6 +97,53 @@
             0% { transform: translateY(0); }
             100% { transform: translateY(-5px); }
         }
+        .bug-report {
+            margin-top: 20px;
+            position: relative;
+            background-color: #87CEEB;
+            border-radius: 0 0 100px 100px;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .bug-report::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: #8B4513;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .bug-report:focus-within::before {
+            top: -40px;
+        }
+        .bug-report form {
+            position: relative;
+            z-index: 1;
+        }
+        .bug-report input,
+        .bug-report textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .bug-report button {
+            background-color: #4a2800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .bug-report button:hover {
+            background-color: #654321;
+        }
     </style>
 </head>
 <body>
@@ -109,7 +156,7 @@
                 <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-steam"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-email"></i></a>
+                <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
             </div>
             <h1>Welcome to da game!</h1>
             <div class="scrolling-banner">
@@ -134,6 +181,15 @@
                 <h2>Contact Us</h2>
                 <p class="contact-info">Email: <a href="mailto:support@webfishing.info">support@webfishing.info</a></p>
                 <p class="contact-info">Twitter: <a href="https://twitter.com/bug_fishing" target="_blank">@bug_fishing</a></p>
+            </div>
+            <div class="bug-report">
+                <h2>Report a Bug</h2>
+                <form action="mailto:support@webfishing.info" method="post" enctype="text/plain">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Describe the bug..." required></textarea>
+                    <button type="submit">Send Bug Report</button>
+                </form>
             </div>
         </div>
     </div>
