@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Camp Notice Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
         @font-face {
             font-family: 'CustomFont';
@@ -78,6 +79,24 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .social-icon {
+            font-size: 24px;
+            color: #4a2800;
+            transition: transform 0.3s ease;
+        }
+        .social-icon:hover {
+            animation: bob 0.5s infinite alternate;
+        }
+        @keyframes bob {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
@@ -86,10 +105,16 @@
             <img src="https://via.placeholder.com/200x100" alt="Game Logo">
         </div>
         <div class="notice-board">
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-steam"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-email"></i></a>
+            </div>
             <h1>Welcome to da game!</h1>
             <div class="scrolling-banner">
                 <div class="scrolling-text">
-                    🚨 NOTICE: Server stability issues expected today • New character skins now available! • Don't forget to join our Discord for the latest updates • Upcoming double XP weekend, stay tuned for details!
+                    🚨 NOTICE: you ar gey. you are GAY
                 </div>
             </div>
             <div class="notice">
