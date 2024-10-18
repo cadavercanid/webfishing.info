@@ -677,8 +677,13 @@ a:hover, button:hover {
                         </div>
                     </div>
                     <div class="notice">
-                        <h2>❓ FAQ</h2>
-                        <div class="faq-item">
+    <h2 class="collapsible-header">
+        ❓ FAQ
+        <span class="toggle-icon-wrapper">
+            <span class="toggle-icon">▼</span>
+        </span>
+    </h2>
+    <div class="collapsible-content" style="display: none;">
                             <div class="faq-question">Why is my game so laggy?</div>
                             <div class="faq-answer">Turns out the game isn't as performant out of the box as we might've liked; but rest assured, optimizing the game further so you guys can have a smoother multiplayer experience with 5+ people is a top priority.</div>
                         </div>
@@ -707,6 +712,7 @@ a:hover, button:hover {
                             <div class="faq-answer">Not at this moment!</div>
                         </div>
                     </div>
+                </div>
                     <div class="bug-report">
                         <h1>🐛 Report a Bug</h1>
                         <form id="bug-report-form">
