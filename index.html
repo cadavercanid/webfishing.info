@@ -6,21 +6,21 @@
     <title>WEBFISHING</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     
-    <link rel="icon" href="thumbnail.ico" type="image/x-icon">
+    <link rel="icon" href="assets/thumbnail.ico" type="image/x-icon">
     <style>
         @font-face {
             font-family: 'CustomFont';
-            src: url('CustomFont.ttf') format('truetype');
+            src: url('assets/font/CustomFont.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         body, a, button, input, textarea {
-    cursor: url('worm_cursor.png'), auto;
+    cursor: url('assets/worm_cursor.png'), auto;
 }
 
 a:hover, button:hover {
-    cursor: url('worm_cursor.png'), pointer;
+    cursor: url('assets/worm_cursor.png'), pointer;
 }
         
         body {
@@ -28,7 +28,7 @@ a:hover, button:hover {
             margin: 0;
             padding: 20px;
             min-height: 100vh;
-            background-image: url('background.gif');
+            background-image: url('assets/background.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -79,7 +79,7 @@ a:hover, button:hover {
     animation: bobbing 4s ease-in-out infinite;
 }
         .notice-board {
-            background-image: url('grass.png');
+            background-image: url('assets/grass.png');
             border-radius: 20px;
             padding: 20px;
         }
@@ -558,7 +558,7 @@ a:hover, button:hover {
 
 <script type="text/javascript">
     (function() {
-        emailjs.init("ToVDCZ2IYXxtUXHUl"); // Your public key
+        emailjs.init("ToVDCZ2IYXxtUXHUl"); 
     })();
 </script>
 </head>
@@ -749,7 +749,7 @@ a:hover, button:hover {
     </div>
 
     <audio id="backgroundMusic" loop>
-        <source src="background-music.mp3" type="audio/mpeg">
+        <source src="assets/music/background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
