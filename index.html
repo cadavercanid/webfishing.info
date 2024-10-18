@@ -542,13 +542,25 @@ a:hover, button:hover {
     transform: translateY(2px) rotate(180deg);
 }
 
-
+@media only screen and (max-width: 768px) {
+    .known-bugs, .steam-embed, .twitter-feed {
+        display: none;
+    }
+}
 
 
 
     </style>
-        <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+    (function() {
+        emailjs.init("ToVDCZ2IYXxtUXHUl"); // Your public key
+    })();
+</script>
 </head>
+
 <body>
     <div class="logo">
         <img src="logo.png" alt="WEBFISHING Logo">
@@ -785,7 +797,6 @@ a:hover, button:hover {
             });
         }
 
-        // FAQ functionality
 // FAQ functionality
 function setupFAQ() {
     const questions = document.querySelectorAll('.faq-question');
@@ -812,47 +823,40 @@ document.addEventListener('DOMContentLoaded', function() {
     setupFAQ();
     setupCollapsible(); 
 });
+</script>
 
-// Initialize EmailJS with your user ID
-(function(){
-    emailjs.init("WEBFISHING"); // Replace with your actual EmailJS user ID
-})();
+<script>
+        document.getElementById('bug-report-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-// Bug report form submission
-document.getElementById('bug-report-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
 
-    // Show loading indicator
-    const submitButton = this.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
+            const templateParams = {
+                name: this.name.value,
+                email: this.email.value,
+                message: this.message.value,
+                imagelinks: this.imagelinks.value
+            };
 
-    // Prepare the template parameters
-    const templateParams = {
-        name: this.name.value,
-        email: this.email.value,
-        message: this.message.value,
-        imagelinks: this.imagelinks.value
-    };
-
-    // Send the email using EmailJS
-    emailjs.send('service_7namz7g', 'template_26uqv5x', templateParams)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            alert('Bug report submitted successfully!');
-            document.getElementById('bug-report-form').reset();
-        }, function(error) {
-            console.log('FAILED...', error);
-            alert('Failed to send bug report. Please try again.');
-        })
-        .finally(function() {
-            // Reset the button text and enable it
-            submitButton.textContent = originalButtonText;
-            submitButton.disabled = false;
+            emailjs.send('service_7namz7g', 'template_26uqv5x', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Bug report submitted successfully!');
+                    document.getElementById('bug-report-form').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to send bug report. Please try again.');
+                })
+                .finally(function() {
+                    submitButton.textContent = 'Send Bug Report';
+                    submitButton.disabled = false;
+                });
         });
-});
+</script>
 
+<script>
 // Background music functionality
 const backgroundMusic = document.getElementById('backgroundMusic');
 const muteButton = document.getElementById('muteButton');
