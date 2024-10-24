@@ -32,17 +32,23 @@
         }
 
         body, a, button, input, textarea {
-    cursor: url('assets/worm_cursor.png'), auto;
-}
+            cursor: url('assets/worm_cursor.png'), auto;
+        }
 
-a:hover, button:hover {
-    cursor: url('assets/worm_cursor.png'), pointer;
-}
+        a:hover, button:hover {
+            cursor: url('assets/worm_cursor.png'), pointer;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         
         body {
             font-family: 'CustomFont', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             min-height: 100vh;
             background-image: url('assets/background.gif');
             background-size: cover;
@@ -53,190 +59,132 @@ a:hover, button:hover {
             flex-direction: column;
             align-items: center;
         }
+
         .page-container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             width: 100%;
             max-width: 1200px;
+            padding: 0 15px;
         }
+
         .main-container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             flex-grow: 1;
             width: 100%;
             gap: 20px;
         }
+
         .notice-board-wrapper {
             background-color: rgba(139, 69, 19, 0);
             border-radius: 15px;
-            padding: -10px;
-            border: 20px solid transparent; 
+            padding: 10px;
+            width: 100%;
             max-width: 100%;
-    width: 100%; 
-    overflow-x: hidden; 
-}
+        }
         
-        @keyframes bobbing {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-.logo {
-    text-align: center;
-    margin-bottom: -60px;
-    margin-top: -50px;
-}
-
-.logo img {
-    max-width: 600px;
-    height: auto;
-    animation: bobbing 4s ease-in-out infinite;
-}
         .notice-board {
             background-image: url('assets/grass.png');
             border-radius: 20px;
             padding: 20px;
+            width: 100%;
         }
         
-        .notice {
-    background-color: rgba(255, 249, 230, 0.9);
-    border: 1px solid #d2b48c;
-    border-bottom: 3px solid #4a2800;
-    border-radius: 20px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
+        @keyframes bobbing {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
 
-        h1, h2 {
-            color: #4a2800;
-            font-size: 40px; 
+        .logo {
+            text-align: center;
+            margin: 0 auto 20px;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 10px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+            animation: bobbing 4s ease-in-out infinite;
+        }
+
+        .notice {
+            background-color: rgba(255, 249, 230, 0.9);
+            border: 1px solid #d2b48c;
+            border-bottom: 3px solid #4a2800;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 10px;
+            width: 100%;
         }
 
         .notice h2 {
-    text-align: center;
-    font-size: 40px; 
-    margin-top: 0px; 
-    margin-bottom: 10px; 
-}
+            text-align: center;
+            font-size: clamp(24px, 5vw, 40px);
+            margin: 0 0 10px;
+            color: #4a2800;
+        }
 
-        .scrolling-banner {
-            overflow: hidden;
-            background-color: rgba(255, 165, 0, 0.9);
-            padding: 10px 0;
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-        .scrolling-text {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scroll 20s linear infinite;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
         .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 20px;
-}
-.social-icon {
-    font-size: 48px;
-    color:rgba(255, 249, 230, 0.9);
-    transition: transform 0.3s ease;
-}
-.social-icon:hover {
-    animation: bob 0.5s infinite alternate;
-}
-@keyframes bob {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-}
-.bug-report {
-    margin-top: 20px;
-    position: relative;
-    background-image: url('assets/sand.png');
-    border-radius: 10px;
-    padding: 20px;
-    overflow: hidden;
-    text-align: center;
-}
-
-/* Waves styles */
-.waves-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 23%; 
-    overflow: hidden;
-}
-
-.waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 60px;
-    max-height: 150px;
-}
-
-.parallax > use {
-    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
-}
-.parallax > use:nth-child(1) {
-    animation-delay: -2s;
-    animation-duration: 7s;
-}
-.parallax > use:nth-child(2) {
-    animation-delay: -3s;
-    animation-duration: 10s;
-}
-.parallax > use:nth-child(3) {
-    animation-delay: -4s;
-    animation-duration: 13s;
-}
-.parallax > use:nth-child(4) {
-    animation-delay: -5s;
-    animation-duration: 20s;
-}
-
-@keyframes move-forever {
-    0% {
-        transform: translate3d(-90px,0,0);
-    }
-    100% {
-        transform: translate3d(85px,0,0);
-    }
-}
-
-        .bug-report::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background-color: #ff0000;
-            border-radius: 50%;
-            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: clamp(15px, 3vw, 30px);
+            margin: 15px 0;
+            padding: 0 10px;
         }
-        .bug-report:focus-within::before {
-            top: -40px;
+
+        .social-icon {
+            font-size: clamp(24px, 5vw, 48px);
+            color: rgba(255, 249, 230, 0.9);
+            transition: transform 0.3s ease;
         }
-        .bug-report form {
-            position: relative;
-            z-index: 1;
-            display: inline-block;
-            text-align: left;
+
+        .social-icon:hover {
+            animation: bob 0.5s infinite alternate;
+        }
+
+        .steam-embed {
             width: 100%;
-            max-width: 400px;
+            max-width: 646px;
+            height: clamp(150px, 30vw, 190px);
+            margin: 20px auto;
+            border-radius: 5px;
+            overflow: hidden;
         }
+
+        .steam-embed iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bug-report {
+            margin: 20px auto;
+            position: relative;
+            background-image: url('assets/sand.png');
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .bug-report h1 {
+            font-size: clamp(24px, 5vw, 40px);
+            margin-bottom: 20px;
+            color: #4a2800;
+        }
+
+        .bug-report form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         .bug-report input,
         .bug-report textarea {
             width: 100%;
@@ -246,228 +194,73 @@ a:hover, button:hover {
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
             font-family: 'CustomFont', Arial, sans-serif;
-            font-size: 25px;
+            font-size: clamp(16px, 3vw, 25px);
         }
+
         .bug-report textarea {
             height: 100px;
+            resize: vertical;
         }
+
         .bug-report button {
-            background-color: #367d6b            ;
+            background-color: #367d6b;
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-family: 'CustomFont', Arial, sans-serif;
+            font-size: clamp(16px, 3vw, 20px);
             float: right;
         }
-        .bug-report button:hover {
-            background-color: #654321;
-        }
-        .bug-report .image-info {
-            font-size: 0.9em;
-            color: #4a2800;
-            margin-top: 5px;
-            text-align: left;
-        }
-        .known-bugs {
-            width: 30%;
-            padding-top: 0px;
-            margin-right: -10px;
-            margin-left: -100px;
-        }
-        .known-bugs h2 {
-            text-align: center;
-            font-size: 45px;
-            margin-bottom: 10px;
-            color: rgba(255, 249, 230);
-            -webkit-text-stroke: .2px black;
-            font-weight: bold;
 
-        }
-        .bug-note {
-    background-color: #ffff99;
-    border: 1px solid #ffcc00;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.bug-note h3 {
-    font-size: 24px; 
-    margin-bottom: 10px; 
-    color: #4a2800; 
-    
-}
-
-
-.bug-note.in-progress:hover {
-    opacity: 0.9;
-    text-shadow: 0px -2px #ec2225, 0px 2px #00c2cb, -2px 0px #ec2225, 2px 0px #00c2cb;
-}
-
-.bug-note.in-progress::before,
-.bug-note.in-progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ffff99;
-    z-index: -1;
-    mix-blend-mode: overlay;
-    opacity: 0.6;
-}
-
-.bug-note.in-progress:hover::before {
-    animation: glitch-animate 50ms steps(5, end) infinite;
-}
-
-.bug-note.in-progress:hover::after {
-    animation: glitch-animate-color 100ms steps(8, end) infinite;
-}
-
-@keyframes glitch-animate {
-    0%, 100% { transform: translate(0); }
-    10% { transform: translate(-2px, 2px); }
-    20%, 60% { transform: translate(-2px, -2px); }
-    30%, 50% { transform: translate(2px, 2px); }
-    40% { transform: translate(2px, -2px); }
-    70% { transform: translate(-2px, 1px); }
-    80% { transform: translate(1px, -1px); }
-    90% { transform: translate(1px, 1px); }
-}
-
-@keyframes glitch-animate-color {
-    0%, 100% { opacity: 0.6; }
-    25% { opacity: 0.8; }
-    50% { opacity: 0.4; }
-    75% { opacity: 0.7; }
-}
-
-.bug-note h3, .bug-note p, .bug-note .bug-progress-container {
-    position: relative;
-    z-index: 1;
-    margin-top: 0;
-}
-        .bug-progress-container {
-            display: flex;
-            align-items: center;
-            margin-top: -10px;
-        }
-        .bug-progress {
-            flex-grow: 1;
-            background-color: #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        .bug-progress-bar {
-            height: 10px;
-            background-color: #4CAF50;
-            border-radius: 5px;
-        }
-        .bug-progress-icon {
-            font-size: 1.2em;
-            color: #4a2800;
-        }
-        .updates-container {
-            max-height: 500px;
-            overflow-y: auto;
-        }
         .update-box {
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #d2b48c;
             border-radius: 5px;
-            padding: 10px;
+            padding: 15px;
             margin-bottom: 10px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 15px;
         }
-        .update-content {
-            flex: 1;
-        }
+
         .update-version {
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: bold;
-            margin-bottom: 5px;
         }
+
         .update-fixes {
             list-style-type: disc;
             padding-left: 20px;
-            margin-bottom: 10px;
+            font-size: clamp(14px, 3vw, 16px);
         }
-        .update-link {
-            display: inline-block;
-            margin-top: 5px;
-        }
-        .update-calendar {
-            width: 100px;
-            margin-left: 10px;
-        }
-        .calendar {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 5px;
-            font-size: 0.8em;
-        }
-        .calendar-header {
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-        }
-        .calendar-day {
-            text-align: center;
-            padding: 2px;
-            font-size: 0.7em;
-        }
-        .calendar-day.release-date {
-            background-color: #ffcc00;
-            border-radius: 50%;
-            font-weight: bold;
-        }
-        .faq-item {
-            margin-bottom: 10px;
-        }
-        .faq-question {
-            background-color: #f0e68c80;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 20px;
-            border-bottom: 2px solid #4a2800; 
 
+        .update-calendar {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
         }
-        .faq-answer {
-            background-color: #fff9e6;
-            padding: 10px;
-            display: none;
-            border-radius: 0 0 5px 5px;
-            font-size: 20px;
+
+        footer {
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: clamp(16px, 3vw, 22px);
         }
-        .faq-question::after {
-            content: '\25BC';
-            float: right;
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
         }
-        .faq-question.active::after {
-            content: '\25B2';
-        }
-        .twitter-feed {
-            width: 30%;
-            padding-top: 20px;
-            margin-right: -100px;
-            margin-left: -10px;
-        }
+
         .mute-button {
             position: fixed;
             top: 20px;
@@ -478,105 +271,123 @@ a:hover, button:hover {
             width: 40px;
             height: 40px;
             font-size: 20px;
-            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-        footer {
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    margin-top: -20px;
-    border-radius: 10px;
-    width: 60%; 
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 22px;
-}
-        footer a {
-            color: #ffd700;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .press-kit {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .press-kit:hover {
-            text-decoration: underline;
+
+        .waves-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 23%;
+            overflow: hidden;
         }
 
-        .steam-embed {
-    width: 646px;
-    height: 190px;
-    margin: 20px auto; 
-    overflow: hidden;
-    border-radius: 5px;
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
-}
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 60px;
+            max-height: 150px;
+        }
 
-.steam-embed iframe {
-    width: 100%;
-    height: 100%;
-}
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+        }
 
-.collapsible-header {
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    padding-right: 40px;
-}
+        @keyframes move-forever {
+            0% { transform: translate3d(-90px,0,0); }
+            100% { transform: translate3d(85px,0,0); }
+        }
 
-.toggle-icon-wrapper {
-    position: absolute;
-    right: 20px; 
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            .page-container {
+                padding: 0 10px;
+            }
 
-.toggle-icon {
-    transition: transform 0.3s ease;
-    transform: translateY(5px); 
-    font-size: 0.8em; 
-}
+            .notice-board {
+                padding: 15px;
+            }
 
-.toggle-icon.rotated {
-    transform: translateY(2px) rotate(180deg);
-}
+            .update-box {
+                padding: 10px;
+            }
 
-@media only screen and (max-width: 1268px) {
-    .known-bugs, .steam-embed, .twitter-feed {
-        display: none;
-    }
-}
+            .known-bugs,
+            .twitter-feed {
+                display: none;
+            }
 
+            .bug-report {
+                padding: 15px;
+            }
+        }
 
+        @media screen and (max-width: 480px) {
+            .page-container {
+                padding: 0 5px;
+            }
 
+            .notice-board {
+                padding: 10px;
+            }
+
+            .bug-report {
+                padding: 10px;
+            }
+
+            .waves-container {
+                height: 15%;
+            }
+        }
+
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .toggle-icon-wrapper {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+            transform: translateY(5px);
+            font-size: 0.8em;
+        }
+
+        .toggle-icon.rotated {
+            transform: translateY(2px) rotate(180deg);
+        }
+
+        .updates-container {
+            max-height: 500px;
+            overflow-y: auto;
+        }
     </style>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<script type="text/javascript">
-    (function() {
-        emailjs.init("ToVDCZ2IYXxtUXHUl"); 
-    })();
-</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("ToVDCZ2IYXxtUXHUl");
+        })();
+    </script>
 </head>
 
 <body>
@@ -607,7 +418,7 @@ a:hover, button:hover {
                                 <span class="toggle-icon">▼</span>
                             </span>
                         </h2>
-                                                <div class="collapsible-content updates-container" style="display: none;">
+                        <div class="collapsible-content updates-container" style="display: none;">
                             <div class="update-box">
                                 <div class="update-content">
                                     <div class="update-version">Patch 1.08</div>
@@ -625,7 +436,6 @@ a:hover, button:hover {
                                         <li>Handful of addtional typos</li>
                                         <li>Fixed resolution resetting on launch occasionally</li>
                                     </ul>
-                                    <a href="https://store.steampowered.com/news/app/3146520/view/4512135723843670968?l=english" class="update-link" target="_blank">Read full patch notes</a>
                                 </div>
                                 <div class="update-calendar">
                                     <div class="calendar">
@@ -649,7 +459,6 @@ a:hover, button:hover {
                                         <li>Leedsichthys was wrongly-named</li>
                                         <li>Tweaked Borderless Windowed mode a bit</li>
                                     </ul>
-                                    <a href="https://store.steampowered.com/news/app/3146520/view/4514387160625220040?l=english" class="update-link" target="_blank">Read full patch notes</a>
                                 </div>
                                 <div class="update-calendar">
                                     <div class="calendar">
@@ -671,7 +480,6 @@ a:hover, button:hover {
                             <button type="submit">Send Bug Report</button>
                         </form>
                         
-                        <!-- Add this for the waves -->
                         <div class="waves-container">
                             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
@@ -684,11 +492,9 @@ a:hover, button:hover {
                                     <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(117, 191, 160, 0.3)" />
                                     <use xlink:href="#gentle-wave" x="48" y="7" fill="#75bfa0" />
                                 </g>
-                                                              
                             </svg>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -729,11 +535,12 @@ a:hover, button:hover {
                 }
                 
                 grid.innerHTML = calendarHTML;
-                grid.closest('.calendar').querySelector('.calendar-header').textContent = releaseDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+                grid.closest('.calendar').querySelector('.calendar-header').textContent = 
+                    releaseDate.toLocaleString('default', { month: 'long', year: 'numeric' });
             });
         }
 
-        // Function to set the correct icon for bug progress and apply in-progress class
+        // Bug progress functionality
         function setBugProgressIcons() {
             const bugNotes = document.querySelectorAll('.bug-note');
             bugNotes.forEach(note => {
@@ -749,37 +556,28 @@ a:hover, button:hover {
             });
         }
 
-// FAQ functionality
-function setupFAQ() {
-    const questions = document.querySelectorAll('.faq-question');
-    questions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
+        // Collapsible functionality
+        function setupCollapsible() {
+            const headers = document.querySelectorAll('.collapsible-header');
+            headers.forEach(header => {
+                const content = header.nextElementSibling;
+                const toggleIcon = header.querySelector('.toggle-icon');
 
-            // Toggle the display of the clicked answer
-            if (answer.style.display === 'block') {
-                answer.style.display = 'none';
-                question.classList.remove('active');
-            } else {
-                answer.style.display = 'block';
-                question.classList.add('active');
-            }
-        });
-    });
-}
+                header.addEventListener('click', () => {
+                    if (content.style.display === 'block' || content.style.display === '') {
+                        content.style.display = 'none';
+                        toggleIcon.classList.remove('rotated');
+                    } else {
+                        content.style.display = 'block';
+                        toggleIcon.classList.add('rotated');
+                    }
+                });
+            });
+        }
 
-// Call all setup functions when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    generateUpdateCalendars();
-    setBugProgressIcons();
-    setupFAQ();
-    setupCollapsible(); 
-});
-</script>
-
-<script>
+        // EmailJS form handling
         document.getElementById('bug-report-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
 
             const submitButton = this.querySelector('button[type="submit"]');
             submitButton.textContent = 'Sending...';
@@ -806,56 +604,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitButton.disabled = false;
                 });
         });
-</script>
 
-<script>
-// Background music functionality
-const backgroundMusic = document.getElementById('backgroundMusic');
-const muteButton = document.getElementById('muteButton');
-let isMuted = true;  // Start muted
+        // Background music functionality
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const muteButton = document.getElementById('muteButton');
+        let isMuted = true;
 
-function toggleMute() {
-    if (isMuted) {
-        backgroundMusic.play();
-        backgroundMusic.muted = false;
-        muteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-    } else {
-        backgroundMusic.muted = true;
-        muteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
-    }
-    isMuted = !isMuted;
-}
-
-muteButton.addEventListener('click', toggleMute);
-
-// Set initial state
-backgroundMusic.muted = true;
-
-
-
-// Collapsible functionality for Patch Notes
-function setupCollapsible() {
-    const headers = document.querySelectorAll('.collapsible-header');
-    
-    headers.forEach(header => {
-        const content = header.nextElementSibling;
-        const toggleIcon = header.querySelector('.toggle-icon');
-
-        header.addEventListener('click', () => {
-            // Toggle the display of the content
-            if (content.style.display === 'block' || content.style.display === '') {
-                content.style.display = 'none';
-                toggleIcon.classList.remove('rotated');
+        function toggleMute() {
+            if (isMuted) {
+                backgroundMusic.play();
+                backgroundMusic.muted = false;
+                muteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
             } else {
-                content.style.display = 'block';
-                toggleIcon.classList.add('rotated');
+                backgroundMusic.muted = true;
+                muteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
             }
+            isMuted = !isMuted;
+        }
+
+        muteButton.addEventListener('click', toggleMute);
+        backgroundMusic.muted = true;
+
+        // Initialize all functionality when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            generateUpdateCalendars();
+            setBugProgressIcons();
+            setupCollapsible();
         });
-    });
-}
-
-
-
     </script>
 </body>
 </html>
