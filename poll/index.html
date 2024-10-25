@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" href="../assets/thumbnail.ico" type="image/x-icon">
+    <link rel="icon" href="assets/thumbnail.ico" type="image/x-icon">
 
     <title>Choose Your Top 3 Animals</title>
     <style>
@@ -26,19 +26,26 @@
 }
 
 
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: clamp(1.5em, 5vw, 2em); /* Responsive font size */
+}
 
-        h2 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 1.5em;
-            margin-top: -30px;
-        }
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: clamp(1.2em, 4vw, 1.5em); /* Responsive font size */
+    margin-top: -30px;
+}
+
+.animal-name {
+    margin-top: 10px;
+    font-size: clamp(14px, 3.5vw, 16px); /* Responsive font size */
+    color: var(--primary-color);
+    font-weight: 500;
+}
 
 
         .countdown-timer {
@@ -126,26 +133,62 @@
 
 /* Mobile layout */
 @media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
     .grid-container {
         grid-template-columns: repeat(2, 1fr); /* Two columns for mobile */
-        gap: 15px; /* Slightly smaller gap for mobile */
+        gap: 10px;
+        padding: 10px;
     }
 
     .dot {
-        width: 80px; /* Slightly smaller dots for mobile */
-        height: 80px;
+        width: 120px; /* Larger dots for mobile */
+        height: 120px;
     }
 
     .animal-icon {
-        width: 45px; /* Slightly smaller icons for mobile */
-        height: 45px;
+        width: 70px; /* Larger icons for mobile */
+        height: 70px;
+    }
+
+    .countdown-timer {
+        font-size: clamp(16px, 4vw, 18px);
+        padding: 15px;
+    }
+
+    .selection-counter {
+        font-size: clamp(16px, 4vw, 18px);
+    }
+
+    .submit-btn {
+        font-size: clamp(16px, 4vw, 18px);
+        padding: 12px 30px;
+        width: 90%; /* Wider button on mobile */
+        max-width: 300px;
+    }
+
+    .logo-container .bobbing-logo {
+        width: 80%; /* Smaller logo on mobile */
+        max-width: 300px;
     }
 }
 
-/* Tablet layout */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+/* Add very small screen adjustments */
+@media screen and (max-width: 360px) {
     .grid-container {
-        grid-template-columns: repeat(3, 1fr); /* Three columns for tablet */
+        grid-template-columns: 1fr; /* Single column for very small screens */
+    }
+
+    .dot {
+        width: 150px; /* Even larger dots for better visibility */
+        height: 150px;
+    }
+
+    .animal-icon {
+        width: 90px;
+        height: 90px;
     }
 }
 
@@ -174,7 +217,7 @@
 
         .animal-name {
             margin-top: 10px;
-            font-size: 14px;
+            font-size: 24px;
             color: var(--primary-color);
             font-weight: 500;
         }
