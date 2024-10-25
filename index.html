@@ -383,6 +383,46 @@
             max-height: 500px;
             overflow-y: auto;
         }
+
+        .poll-button {
+    display: block;  /* Changed from inline-block to block */
+    width: fit-content; /* Makes the button only as wide as its content */
+    padding: 15px 30px;
+    font-family: 'CustomFont', Arial, sans-serif;
+    font-size: 24px;
+    color: #4a2800;
+    background: linear-gradient(45deg, #f1edd2, #f1edd2);
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    margin: 20px auto; /* 'auto' for left/right margin centers it */
+    text-align: center;
+    animation: pulse-glow 2s infinite;
+    box-shadow: 0 0 15px #d2b48c (85, 113, 83, 0.5);
+    transition: transform 0.3s ease;
+}
+
+
+.poll-button:hover {
+    transform: scale(1.05);
+    animation: pulse-glow 1s infinite;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 15px rgba(85, 113, 83, 0.5);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(85, 113, 83, 0.8);
+        transform: scale(1.02);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(85, 113, 83, 0.5);
+        transform: scale(1);
+    }
+}
+
     </style>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -397,6 +437,8 @@
     <div class="logo">
         <img src="assets/logo.png" alt="WEBFISHING Logo">
     </div>
+    <a href="/polls/index.html" class="poll-button">🗳️ Take this week's poll!</a>
+
     <button class="mute-button" id="muteButton"><i class="fas fa-volume-mute"></i></button>
     <div class="page-container">
         <div class="main-container">

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose Your Top 3 Animals</title>
+    <style>
+@font-face {
+    font-family: 'CustomFont';
+    src: url('assets/CustomFont.ttf') format('truetype');
+}
+
+        :root {
+            --primary-color: #557153;
+            --secondary-color: #7D8F69;
+            --accent-color: #A9AF7E;
+            --highlight-color: #E6E5A3;
+            --background-color: #FFF8E3;
+        }
+
+        body {
+    font-family: 'CustomFont', Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
+}
+
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-top: -30px;
+        }
+
+
+        .countdown-timer {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .countdown-timer.urgent {
+            background-color: #e74c3c;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .selection-counter {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--secondary-color);
+        }
+
+        .grid-container {
+    display: grid;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* Default (desktop) */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    justify-items: center;
+}
+
+        .animal-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .animal-dot:hover .dot:not(.disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .selection-number {
+    position: absolute;
+    top: -5px;
+    right: -5px; 
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 1; 
+}
+
+.grid-container {
+    display: grid;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* Default (desktop) */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    justify-items: center;
+}
+
+/* Mobile layout */
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for mobile */
+        gap: 15px; /* Slightly smaller gap for mobile */
+    }
+
+    .dot {
+        width: 80px; /* Slightly smaller dots for mobile */
+        height: 80px;
+    }
+
+    .animal-icon {
+        width: 45px; /* Slightly smaller icons for mobile */
+        height: 45px;
+    }
+}
+
+/* Tablet layout */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* Three columns for tablet */
+    }
+}
+
+        .selected .selection-number {
+            display: flex;
+        }
+
+        .dot {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .animal-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .animal-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .selected .dot {
+            background-color: var(--highlight-color);
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .animal-dot.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .submit-btn {
+    font-family: 'CustomFont', Arial, sans-serif; 
+    display: block;
+    margin: 30px auto;
+    padding: 15px 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+
+        .submit-btn:hover:not(:disabled) {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .voted-message {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+
+        .voted-message.visible {
+            display: block;
+        }
+
+        .logo-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.bobbing-logo {
+    width: 350px; 
+    height: auto;
+    animation: bobbing 2s ease-in-out infinite;
+    margin-bottom: -40px;
+    margin-top: -40px;
+}
+
+@keyframes bobbing {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="logo-container">
+        <img src="assets/wf-logo.png" alt="Logo" class="bobbing-logo">
+    </div>
+    
+    <h1>Choose Your Top 3 Animal Nominees</h1>
+    <h2>(In order of preference)</h2>
+    <div class="countdown-timer">
+        Time remaining: <span id="countdown">Loading...</span>
+    </div>
+    <div class="selection-counter">Selected: <span id="counter">0</span>/3</div>
+    
+    <div class="grid-container">
+    </div>
+
+    <button type="button" class="submit-btn" id="submitBtn" disabled>Submit Choices</button>
+    <div class="voted-message" id="votedMessage">You have already voted. Thank you for participating!</div>
+
+    <script>
+        const HOURS_72 = 72 * 60 * 60 * 1000; // 72 hours in milliseconds
+
+        let startTime = localStorage.getItem('pollStartTime');
+        if (!startTime) {
+            startTime = new Date().getTime();
+            localStorage.setItem('pollStartTime', startTime);
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const elapsed = now - parseInt(startTime);
+            const remaining = HOURS_72 - elapsed;
+
+            if (remaining <= 0) {
+                // Poll has ended
+                document.getElementById('countdown').textContent = 'Poll has ended';
+                disableVoting();
+                return;
+            }
+
+            const hours = Math.floor(remaining / (60 * 60 * 1000));
+            const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
+
+            const timeString = `${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('countdown').textContent = timeString;
+
+            const countdownElement = document.querySelector('.countdown-timer');
+            if (remaining < (60 * 60 * 1000)) { // less than 1 hour
+                countdownElement.classList.add('urgent');
+            }
+
+            setTimeout(updateCountdown, 1000);
+        }
+
+        updateCountdown();
+
+        const animals = [
+            { name: 'Badger', image: 'assets/badger.png' },
+            { name: 'Bat', image: 'assets/bat.png' },
+            { name: 'Bear', image: 'assets/bear.png' },
+            { name: 'Beaver', image: 'assets/beaver.png' },
+            { name: 'Deer', image: 'assets/deer.png' },
+            { name: 'Duck', image: 'assets/duck.png' },
+            { name: 'Fox', image: 'assets/fox.png' },
+            { name: 'Frog', image: 'assets/frog.png' },
+            { name: 'Goat', image: 'assets/goat.png' },
+            { name: 'Lizard', image: 'assets/lizard.png' },
+            { name: 'Monkey', image: 'assets/monkey.png' },
+            { name: 'Otter', image: 'assets/otter.png' },
+            { name: 'Penguin', image: 'assets/penguin.png' },
+            { name: 'Porcupine', image: 'assets/porcupine.png' },
+            { name: 'Possum', image: 'assets/possum.png' },
+            { name: 'Rabbit', image: 'assets/rabbit.png' },
+            { name: 'Rat', image: 'assets/rat.png' },
+            { name: 'Seagull', image: 'assets/seagull.png' },
+            { name: 'Sheep', image: 'assets/sheep.png' },
+            { name: 'Skunk', image: 'assets/skunk.png' },
+            { name: 'Weasel', image: 'assets/weasel.png' }
+        ];
+
+        let selectedCount = 0;
+        const MAX_SELECTIONS = 3;
+        let selectionOrder = [];
+
+        function hasUserVoted() {
+            return localStorage.getItem('hasVoted') === 'true';
+        }
+
+        function markUserAsVoted() {
+            localStorage.setItem('hasVoted', 'true');
+        }
+
+        function disableVoting() {
+            const dots = document.getElementsByClassName('animal-dot');
+            Array.from(dots).forEach(dot => {
+                dot.classList.add('disabled');
+                dot.onclick = null; 
+            });
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('votedMessage').classList.add('visible');
+        }
+
+        if (hasUserVoted()) {
+            document.addEventListener('DOMContentLoaded', function() {
+                disableVoting();
+            });
+        }
+
+        const gridContainer = document.querySelector('.grid-container');
+        animals.forEach(animal => {
+            const animalElement = document.createElement('div');
+            animalElement.className = 'animal-dot';
+            animalElement.innerHTML = `
+                <div class="selection-number"></div>
+                <div class="dot">
+                    <img src="${animal.image}" alt="${animal.name}" class="animal-icon">
+                </div>
+                <span class="animal-name">${animal.name}</span>
+            `;
+            animalElement.onclick = () => toggleSelection(animalElement);
+            gridContainer.appendChild(animalElement);
+        });
+
+        function toggleSelection(element) {
+            if (element.classList.contains('disabled')) return;
+
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                selectedCount--;
+                const index = selectionOrder.indexOf(element);
+                selectionOrder.splice(index, 1);
+                updateSelectionNumbers();
+                enableAllDots();
+            } else if (selectedCount < MAX_SELECTIONS) {
+                element.classList.add('selected');
+                selectedCount++;
+                selectionOrder.push(element);
+                updateSelectionNumbers();
+                if (selectedCount === MAX_SELECTIONS) {
+                    disableUnselectedDots();
+                }
+            }
+
+            updateCounter();
+            updateSubmitButton();
+        }
+
+        function updateSelectionNumbers() {
+            document.querySelectorAll('.selection-number').forEach(num => num.textContent = '');
+            selectionOrder.forEach((element, index) => {
+                element.querySelector('.selection-number').textContent = index + 1;
+            });
+        }
+
+        function updateCounter() {
+            document.getElementById('counter').textContent = selectedCount;
+        }
+
+        function disableUnselectedDots() {
+            const dots = document.getElementsByClassName('animal-dot');
+            Array.from(dots).forEach(dot => {
+                if (!dot.classList.contains('selected')) {
+                    dot.classList.add('disabled');
+                }
+            });
+        }
+
+        function enableAllDots() {
+            const dots = document.getElementsByClassName('animal-dot');
+            Array.from(dots).forEach(dot => {
+                dot.classList.remove('disabled');
+            });
+        }
+
+        function updateSubmitButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = selectedCount !== MAX_SELECTIONS;
+        }
+
+        // Updated submission handler
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            if (selectedCount !== MAX_SELECTIONS) return;
+
+            if (hasUserVoted()) {
+                alert('You have already submitted your choices. Thank you for participating!');
+                return;
+            }
+
+            const selectedAnimals = selectionOrder.map(el => 
+                el.querySelector('.animal-name').textContent
+            );
+
+            fetch('https://animal-advocacy-backend.onrender.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    choices: selectedAnimals
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                markUserAsVoted();
+                alert('Thank you for your submission!');
+                resetSelections();
+                disableVoting();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your choices. Please try again.');
+            });
+        });
+
+        function resetSelections() {
+            selectionOrder.forEach(element => {
+                element.classList.remove('selected');
+            });
+            selectionOrder = [];
+            selectedCount = 0;
+            updateCounter();
+            enableAllDots();
+            updateSubmitButton();
+        }
+    </script>
+</body>
+</html>
