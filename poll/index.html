@@ -475,52 +475,38 @@ h2 {
 
         // Updated submission handler
         document.getElementById('submitBtn').addEventListener('click', function() {
-    if (selectedCount !== MAX_SELECTIONS) return;
+            if (selectedCount !== MAX_SELECTIONS) return;
 
-    if (hasUserVoted()) {
-        alert('You have already submitted your choices. Thank you for participating!');
-        return;
-    }
+            if (hasUserVoted()) {
+                alert('You have already submitted your choices. Thank you for participating!');
+                return;
+            }
 
-    const selectedAnimals = selectionOrder.map(el =>
-        el.querySelector('.animal-name').textContent
-    );
+            const selectedAnimals = selectionOrder.map(el => 
+                el.querySelector('.animal-name').textContent
+            );
 
-    console.log('Attempting to submit:', selectedAnimals); // Debug log
-
-    // Use HTTPS instead of HTTP
-    fetch('https://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        mode: 'cors', // Add this
-        credentials: 'omit', // Add this
-        body: JSON.stringify({
-            choices: selectedAnimals
-        })
-    })
-    .then(response => {
-        console.log('Response status:', response.status); // Debug log
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data); // Debug log
-        markUserAsVoted();
-        alert('Thank you for your submission!');
-        resetSelections();
-        disableVoting();
-    })
-    .catch(error => {
-        console.error('Error details:', error); // Detailed error log
-        alert('There was an error submitting your choices. Please try again.\n' + error.message);
-    });
-});
-
+            fetch('https://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/submit', {
+method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    choices: selectedAnimals
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                markUserAsVoted();
+                alert('Thank you for your submission!');
+                resetSelections();
+                disableVoting();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your choices. Please try again.');
+            });
+        });
 
         function resetSelections() {
             selectionOrder.forEach(element => {
