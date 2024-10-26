@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="icon" href="assets/thumbnail.ico" type="image/x-icon">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Your Top 3 Animals</title>
     <style>
@@ -283,6 +284,9 @@
             border-radius: 5px;
             font-size: 12px;
             display: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -307,11 +311,15 @@
     <div class="debug-info" id="debugInfo"></div>
 
     <script>
+        // API URL Configuration
+        const API_URL = 'http://webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com';
+
         // Debug logging function
         function debugLog(message) {
             console.log(message);
             const debugInfo = document.getElementById('debugInfo');
-            debugInfo.innerHTML += `${new Date().toISOString()} - ${message}<br>`;
+            const timestamp = new Date().toLocaleTimeString();
+            debugInfo.innerHTML = `${timestamp} - ${message}<br>` + debugInfo.innerHTML;
         }
 
         // Show debug info in development
@@ -323,7 +331,7 @@
         async function testServerConnection() {
             try {
                 debugLog('Testing server connection...');
-                const response = await fetch('http://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/health');
+                const response = await fetch(`${API_URL}/health`);
                 debugLog(`Server connection test: ${response.ok ? 'Success' : 'Failed'}`);
                 return response.ok;
             } catch (error) {
@@ -342,7 +350,6 @@
             startTime = new Date().getTime();
             localStorage.setItem('pollStartTime', startTime);
         }
-
         function updateCountdown() {
             const now = new Date().getTime();
             const elapsed = now - parseInt(startTime);
@@ -517,15 +524,16 @@
             submitBtn.classList.add('loading');
 
             try {
-                // First verify server is responding
-                const healthCheck = await fetch('http://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/health');
+                // Health check
+                const healthCheck = await fetch(`${API_URL}/health`);
                 if (!healthCheck.ok) {
                     throw new Error('Server is not responding');
                 }
 
                 debugLog('Server health check passed');
 
-                const response = await fetch('http://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/submit', {
+                // Submit votes
+                const response = await fetch(`${API_URL}/submit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
