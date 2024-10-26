@@ -2,13 +2,13 @@
 <html>
 <head>
     <link rel="icon" href="assets/thumbnail.ico" type="image/x-icon">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Your Top 3 Animals</title>
     <style>
-@font-face {
-    font-family: 'CustomFont';
-    src: url('assets/CustomFont.ttf') format('truetype');
-}
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('assets/CustomFont.ttf') format('truetype');
+        }
 
         :root {
             --primary-color: #557153;
@@ -19,34 +19,32 @@
         }
 
         body {
-    font-family: 'CustomFont', Arial, sans-serif;
-    background-color: var(--background-color);
-    margin: 0;
-    padding: 20px;
-}
+            font-family: 'CustomFont', Arial, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+        }
 
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: clamp(1.5em, 5vw, 2em);
+        }
 
-h1 {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-    font-size: clamp(1.5em, 5vw, 2em); /* Responsive font size */
-}
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: clamp(1.2em, 4vw, 1.5em);
+            margin-top: -30px;
+        }
 
-h2 {
-    text-align: center;
-    color: var(--primary-color);
-    font-size: clamp(1.2em, 4vw, 1.5em); /* Responsive font size */
-    margin-top: -30px;
-}
-
-.animal-name {
-    margin-top: 10px;
-    font-size: clamp(14px, 3.5vw, 16px); /* Responsive font size */
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
+        .animal-name {
+            margin-top: 10px;
+            font-size: clamp(14px, 3.5vw, 16px);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
 
         .countdown-timer {
             text-align: center;
@@ -79,15 +77,14 @@ h2 {
         }
 
         .grid-container {
-    display: grid;
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    /* Default (desktop) */
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    justify-items: center;
-}
+            display: grid;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            justify-items: center;
+        }
 
         .animal-dot {
             display: flex;
@@ -104,93 +101,80 @@ h2 {
         }
 
         .selection-number {
-    position: absolute;
-    top: -5px;
-    right: -5px; 
-    width: 24px;
-    height: 24px;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    z-index: 1; 
-}
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 1;
+        }
 
-.grid-container {
-    display: grid;
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    /* Default (desktop) */
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    justify-items: center;
-}
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
 
-/* Mobile layout */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 10px;
+            }
 
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* Two columns for mobile */
-        gap: 10px;
-        padding: 10px;
-    }
+            .dot {
+                width: 120px;
+                height: 120px;
+            }
 
-    .dot {
-        width: 120px; /* Larger dots for mobile */
-        height: 120px;
-    }
+            .animal-icon {
+                width: 70px;
+                height: 70px;
+            }
 
-    .animal-icon {
-        width: 70px; /* Larger icons for mobile */
-        height: 70px;
-    }
+            .countdown-timer {
+                font-size: clamp(16px, 4vw, 18px);
+                padding: 15px;
+            }
 
-    .countdown-timer {
-        font-size: clamp(16px, 4vw, 18px);
-        padding: 15px;
-    }
+            .selection-counter {
+                font-size: clamp(16px, 4vw, 18px);
+            }
 
-    .selection-counter {
-        font-size: clamp(16px, 4vw, 18px);
-    }
+            .submit-btn {
+                font-size: clamp(16px, 4vw, 18px);
+                padding: 12px 30px;
+                width: 90%;
+                max-width: 300px;
+            }
 
-    .submit-btn {
-        font-size: clamp(16px, 4vw, 18px);
-        padding: 12px 30px;
-        width: 90%; /* Wider button on mobile */
-        max-width: 300px;
-    }
+            .logo-container .bobbing-logo {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
 
-    .logo-container .bobbing-logo {
-        width: 80%; /* Smaller logo on mobile */
-        max-width: 300px;
-    }
-}
+        @media screen and (max-width: 360px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
 
-/* Add very small screen adjustments */
-@media screen and (max-width: 360px) {
-    .grid-container {
-        grid-template-columns: 1fr; /* Single column for very small screens */
-    }
+            .dot {
+                width: 150px;
+                height: 150px;
+            }
 
-    .dot {
-        width: 150px; /* Even larger dots for better visibility */
-        height: 150px;
-    }
-
-    .animal-icon {
-        width: 90px;
-        height: 90px;
-    }
-}
+            .animal-icon {
+                width: 90px;
+                height: 90px;
+            }
+        }
 
         .selected .selection-number {
             display: flex;
@@ -215,13 +199,6 @@ h2 {
             object-fit: contain;
         }
 
-        .animal-name {
-            margin-top: 10px;
-            font-size: 24px;
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-
         .selected .dot {
             background-color: var(--highlight-color);
             border-color: var(--primary-color);
@@ -234,20 +211,19 @@ h2 {
         }
 
         .submit-btn {
-    font-family: 'CustomFont', Arial, sans-serif; 
-    display: block;
-    margin: 30px auto;
-    padding: 15px 40px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
+            font-family: 'CustomFont', Arial, sans-serif;
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
 
         .submit-btn:hover:not(:disabled) {
             background-color: var(--secondary-color);
@@ -258,6 +234,12 @@ h2 {
         .submit-btn:disabled {
             background-color: #ccc;
             cursor: not-allowed;
+        }
+
+        .submit-btn.loading {
+            background-color: var(--secondary-color);
+            cursor: wait;
+            opacity: 0.8;
         }
 
         .voted-message {
@@ -273,24 +255,35 @@ h2 {
         }
 
         .logo-container {
-    text-align: center;
-    margin: 20px 0;
-}
+            text-align: center;
+            margin: 20px 0;
+        }
 
-.bobbing-logo {
-    width: 350px; 
-    height: auto;
-    animation: bobbing 2s ease-in-out infinite;
-    margin-bottom: -40px;
-    margin-top: -40px;
-}
+        .bobbing-logo {
+            width: 350px;
+            height: auto;
+            animation: bobbing 2s ease-in-out infinite;
+            margin-bottom: -40px;
+            margin-top: -40px;
+        }
 
-@keyframes bobbing {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0); }
-}
+        @keyframes bobbing {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
 
+        .debug-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -311,9 +304,38 @@ h2 {
 
     <button type="button" class="submit-btn" id="submitBtn" disabled>Submit Choices</button>
     <div class="voted-message" id="votedMessage">You have already voted. Thank you for participating!</div>
+    <div class="debug-info" id="debugInfo"></div>
 
     <script>
-        const HOURS_72 = 72 * 60 * 60 * 1000; // 72 hours in milliseconds
+        // Debug logging function
+        function debugLog(message) {
+            console.log(message);
+            const debugInfo = document.getElementById('debugInfo');
+            debugInfo.innerHTML += `${new Date().toISOString()} - ${message}<br>`;
+        }
+
+        // Show debug info in development
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            document.getElementById('debugInfo').style.display = 'block';
+        }
+
+        // Test server connection on load
+        async function testServerConnection() {
+            try {
+                debugLog('Testing server connection...');
+                const response = await fetch('https://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/health');
+                debugLog(`Server connection test: ${response.ok ? 'Success' : 'Failed'}`);
+                return response.ok;
+            } catch (error) {
+                debugLog(`Server connection test failed: ${error.message}`);
+                return false;
+            }
+        }
+
+        // Call connection test on page load
+        testServerConnection();
+
+        const HOURS_72 = 72 * 60 * 60 * 1000;
 
         let startTime = localStorage.getItem('pollStartTime');
         if (!startTime) {
@@ -327,7 +349,6 @@ h2 {
             const remaining = HOURS_72 - elapsed;
 
             if (remaining <= 0) {
-                // Poll has ended
                 document.getElementById('countdown').textContent = 'Poll has ended';
                 disableVoting();
                 return;
@@ -341,7 +362,7 @@ h2 {
             document.getElementById('countdown').textContent = timeString;
 
             const countdownElement = document.querySelector('.countdown-timer');
-            if (remaining < (60 * 60 * 1000)) { // less than 1 hour
+            if (remaining < (60 * 60 * 1000)) {
                 countdownElement.classList.add('urgent');
             }
 
@@ -390,7 +411,7 @@ h2 {
             const dots = document.getElementsByClassName('animal-dot');
             Array.from(dots).forEach(dot => {
                 dot.classList.add('disabled');
-                dot.onclick = null; 
+                dot.onclick = null;
             });
             document.getElementById('submitBtn').disabled = true;
             document.getElementById('votedMessage').classList.add('visible');
@@ -473,8 +494,10 @@ h2 {
             submitBtn.disabled = selectedCount !== MAX_SELECTIONS;
         }
 
-        // Updated submission handler
-        document.getElementById('submitBtn').addEventListener('click', function() {
+        // Updated submission handler with better error handling
+        document.getElementById('submitBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+
             if (selectedCount !== MAX_SELECTIONS) return;
 
             if (hasUserVoted()) {
@@ -482,30 +505,59 @@ h2 {
                 return;
             }
 
-            const selectedAnimals = selectionOrder.map(el => 
+            const selectedAnimals = selectionOrder.map(el =>
                 el.querySelector('.animal-name').textContent
             );
 
-            fetch('https://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/submit', {
-method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    choices: selectedAnimals
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
+            debugLog('Attempting to submit votes: ' + JSON.stringify(selectedAnimals));
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.classList.add('loading');
+
+            try {
+                // First verify server is responding
+                const healthCheck = await fetch('https://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/health');
+                if (!healthCheck.ok) {
+                    throw new Error('Server is not responding');
+                }
+
+                debugLog('Server health check passed');
+
+                const response = await fetch('https://Webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        choices: selectedAnimals
+                    })
+                });
+
+                debugLog('Response status: ' + response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${errorText}`);
+                }
+
+                const data = await response.json();
+                debugLog('Submission successful: ' + JSON.stringify(data));
+
                 markUserAsVoted();
                 alert('Thank you for your submission!');
                 resetSelections();
                 disableVoting();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error submitting your choices. Please try again.');
-            });
+            } catch (error) {
+                debugLog('Submission error: ' + error.message);
+                console.error('Submission error:', error);
+                alert(`Error submitting choices: ${error.message}\nPlease try again.`);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Choices';
+                submitBtn.classList.remove('loading');
+            }
         });
 
         function resetSelections() {
