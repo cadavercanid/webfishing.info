@@ -2,7 +2,6 @@
 <html>
 <head>
     <link rel="icon" href="assets/thumbnail.ico" type="image/x-icon">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Your Top 3 Animals</title>
     <style>
@@ -314,6 +313,7 @@
         // API URL Configuration
         const API_URL = 'http://webfishinginfo-server-env.eba-446fhmc9.us-east-2.elasticbeanstalk.com';
 
+
         // Debug logging function
         function debugLog(message) {
             console.log(message);
@@ -327,18 +327,23 @@
             document.getElementById('debugInfo').style.display = 'block';
         }
 
-        // Test server connection on load
-        async function testServerConnection() {
-            try {
-                debugLog('Testing server connection...');
-                const response = await fetch(`${API_URL}/health`);
-                debugLog(`Server connection test: ${response.ok ? 'Success' : 'Failed'}`);
-                return response.ok;
-            } catch (error) {
-                debugLog(`Server connection test failed: ${error.message}`);
-                return false;
+       // Update the testServerConnection function
+async function testServerConnection() {
+    try {
+        debugLog('Testing server connection...');
+        const response = await fetch(`${API_URL}/health`, {
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
             }
-        }
+        });
+        debugLog(`Server connection test: ${response.ok ? 'Success' : 'Failed'}`);
+        return response.ok;
+    } catch (error) {
+        debugLog(`Server connection test failed: ${error.message}`);
+        return false;
+    }
+}
 
         // Call connection test on page load
         testServerConnection();
@@ -532,16 +537,18 @@
 
                 debugLog('Server health check passed');
 
-                // Submit votes
-                const response = await fetch(`${API_URL}/submit`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        choices: selectedAnimals
-                    })
-                });
+// Update the submit fetch call
+const response = await fetch(`${API_URL}/submit`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+        choices: selectedAnimals
+    })
+});
 
                 debugLog('Response status: ' + response.status);
 
